@@ -8,4 +8,4 @@ Nesse diretório se encontram todos os artefatos (diagramas, planos, descriçõe
 
 ### Bibliotecas e tecnologias usadas
 
-[PlantUML :plant:](https://plantuml.com)
+[PlantUML :seedling:](https://plantuml.com)
