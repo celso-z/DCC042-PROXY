@@ -11,6 +11,7 @@ Makefile.in
 
 # http://www.gnu.org/software/autoconf
 
+config.h
 autom4te.cache
 /autoscan.log
 /autoscan-*.log
@@ -30,3 +31,8 @@ autom4te.cache
 /stamp-h1
 
 Makefile
+*.o
+*.lo
+*.log
+*.la
+
