@@ -7,7 +7,7 @@
 
 #define K 32
 
-float getWinExpectation(unsigned short player_score, unsigned short adversary_score);
+double getWinExpectation(unsigned short player_score, unsigned short adversary_score);
 
 unsigned short *match(unsigned short score_a, unsigned short score_b, unsigned char result);
 
