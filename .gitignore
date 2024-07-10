@@ -31,8 +31,12 @@ autom4te.cache
 /stamp-h1
 
 Makefile
+
+# Compilation and Linkedition, etc.
 *.o
 *.lo
-*.log
 *.la
 
+#Test output files
+*.log
+*.trs
