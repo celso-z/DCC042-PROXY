@@ -1,5 +1,6 @@
 #include <rank_utils.h>
 
+//Get the probability of an player with a given score (player_score) winning a match against an adversary with a given score (adversary_score)
 double getWinExpectation(unsigned short player_score, unsigned short adversary_score){
 	double probability = 1 /(1 + (pow(10, ((double)adversary_score - (double)player_score) / 400.0)));
 	return probability;
