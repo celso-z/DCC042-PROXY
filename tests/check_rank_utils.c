@@ -2,7 +2,6 @@
 #include <rank_utils.h>
 
 START_TEST(test_win_expectation_boundaries){
-
 	unsigned short player_value = 65535;
 	unsigned short adversary_value = 65535;
 	//Both player and adversary max value
@@ -36,11 +35,32 @@ START_TEST(test_match_upper_boundaries){
 
 	new_values = match(player_value, adversary_value, result);
 	//Test for overflow in the player value
-	ck_assert_msg(new_values != NULL && (new_values[0] == 65535 && new_values[1] == 0), "Match function causing overflow on player value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	ck_assert_msg(new_values != NULL && (new_values[0] == 65535 && new_values[1] == 65519), "Match function causing overflow on player value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	free(new_values);
 	result = 0;
 	new_values = match(player_value, adversary_value, result);
 	//Test for overflow in the adversary value
-	ck_assert_msg(new_values != NULL && (new_values[0] == 0 && new_values[1] == 65535 ), "Match function causing overflow on adversary value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	ck_assert_msg(new_values != NULL && (new_values[0] == 65519 && new_values[1] == 65535), "Match function causing overflow on adversary value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	free(new_values);
+}
+END_TEST
+
+START_TEST(test_match_lower_boundaries){
+	//Check match function for lower boundaries underflows
+	unsigned short player_value = 0;
+	unsigned short adversary_value = 0;
+	unsigned char result = 0;
+	unsigned short *new_values = NULL;
+
+	new_values = match(player_value, adversary_value, result);
+	//Test for underflow in the player value
+	ck_assert_msg(new_values != NULL && (new_values[0] == 0 && new_values[1] == 16), "Match function causing underflow on player value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	free(new_values);
+	result = 1;
+	new_values = match(player_value, adversary_value, result);
+	//Test for underflow in the adversary value
+	ck_assert_msg(new_values != NULL && (new_values[0] == 16 && new_values[1] == 0), "Match function causing underflow on adversary value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	free(new_values);
 }
 END_TEST
 
@@ -67,11 +87,10 @@ Suite *match_suite(void){
 	tc_match_boundaries = tcase_create("Boundaries test match function");
 
 	tcase_add_test(tc_match_boundaries, test_match_upper_boundaries);
+	tcase_add_test(tc_match_boundaries, test_match_lower_boundaries);
 	suite_add_tcase(s, tc_match_boundaries);
 
 	return s;
-
-
 }
 
 int main(void){
@@ -88,6 +107,4 @@ int main(void){
     number_failed = srunner_ntests_failed(sr);
     srunner_free(sr);
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
-
-
 }

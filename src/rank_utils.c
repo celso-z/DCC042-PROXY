@@ -12,12 +12,14 @@ unsigned short *match(unsigned short score_a, unsigned short score_b, unsigned c
 
 	if(result_vector == NULL) return result_vector;
 	for(int i = 0; i < 2; i++){
-		unsigned short current_score;
+		unsigned short current_score = 0;
 		double exact_score = 0.0;
 
 		if(i == 0) current_score = score_a;
 		else current_score = score_b;
 		exact_score = (double)current_score + K * (((i + result) % 2) - expected_result[i]);
+		if(exact_score > 65535) exact_score = 65535;
+		else if(exact_score < 0) exact_score = 0;
 		result_vector[i] = floor(exact_score);
 	}
 	return result_vector;
