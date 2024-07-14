@@ -27,6 +27,23 @@ START_TEST(test_win_expectation_boundaries){
 }
 END_TEST
 
+START_TEST(test_match_upper_boundaries){
+	//Check match function for upper boundaries overflows
+	unsigned short player_value = 65535;
+	unsigned short adversary_value = 65535;
+	unsigned char result = 1;
+	unsigned short *new_values = NULL;
+
+	new_values = match(player_value, adversary_value, result);
+	//Test for overflow in the player value
+	ck_assert_msg(new_values != NULL && (new_values[0] == 65535 && new_values[1] == 0), "Match function causing overflow on player value!\nResults = %d %d\n", new_values[0], new_values[1]);
+	result = 0;
+	new_values = match(player_value, adversary_value, result);
+	//Test for overflow in the adversary value
+	ck_assert_msg(new_values != NULL && (new_values[0] == 0 && new_values[1] == 65535 ), "Match function causing overflow on adversary value!\nResults = %d %d\n", new_values[0], new_values[1]);
+}
+END_TEST
+
 Suite *expected_result_suite(void){
 	Suite *s;
 	TCase *tc_boundaries;
@@ -40,13 +57,32 @@ Suite *expected_result_suite(void){
 
 	return s;
 }
+
+Suite *match_suite(void){
+	Suite *s;
+	TCase *tc_match_boundaries;
+
+	s = suite_create("Boundaries test match function");
+
+	tc_match_boundaries = tcase_create("Boundaries test match function");
+
+	tcase_add_test(tc_match_boundaries, test_match_upper_boundaries);
+	suite_add_tcase(s, tc_match_boundaries);
+
+	return s;
+
+
+}
+
 int main(void){
 	int number_failed;
-    Suite *s;
+    Suite *expected_result_s, *match_s;
     SRunner *sr;
 
-    s = expected_result_suite();
-    sr = srunner_create(s);
+    expected_result_s = expected_result_suite();
+	match_s = match_suite();
+    sr = srunner_create(expected_result_s);
+	srunner_add_suite(sr, match_s);
 
     srunner_run_all(sr, CK_NORMAL);
     number_failed = srunner_ntests_failed(sr);
