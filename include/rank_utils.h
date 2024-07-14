@@ -7,8 +7,8 @@
 
 #define K 32
 
-double getWinExpectation(unsigned short player_score, unsigned short adversary_score);
+double getWinExpectation(unsigned short peer_a_score, unsigned short peer_b_score);
 
-unsigned short *match(unsigned short score_a, unsigned short score_b, unsigned char result);
+unsigned short *match(unsigned short peer_a_score, unsigned short peer_b_score, unsigned char result);
 
 #endif
