@@ -4,13 +4,17 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 
+#define ADDR_SIZE 256 //https://datatracker.ietf.org/doc/html/rfc1034
+
 typedef struct remote_ref{
+	char addr_str[ADDR_SIZE];
 	struct addrinfo *addr;
 	unsigned short score;
 	float download_rate;
 	float upload_rate;
+	uint32_t connection_hits;
 }remote_ref;
 
-remote_ref *init_remote_ref(const char *address);
+remote_ref *init_remote_ref(const char *addr_str);
 void free_remote_ref(remote_ref *r);
 int confrontation(remote_ref *remote_a, remote_ref *remote_b);
