@@ -4,11 +4,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdint.h>
 
 #define K 32
 
-double getWinExpectation(unsigned short peer_a_score, unsigned short peer_b_score);
+double getWinExpectation(uint16_t peer_a_score, uint16_t peer_b_score);
 
-unsigned short *match(unsigned short peer_a_score, unsigned short peer_b_score, unsigned char result);
+uint16_t *match(uint16_t peer_a_score, uint16_t peer_b_score, uint8_t result);
 
 #endif

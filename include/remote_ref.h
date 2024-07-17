@@ -3,13 +3,14 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <stdint.h>
 
 #define ADDR_SIZE 256 //https://datatracker.ietf.org/doc/html/rfc1034
 
 typedef struct remote_ref{
 	char addr_str[ADDR_SIZE];
 	struct addrinfo *addr;
-	unsigned short score;
+	uint16_t score;
 	float download_rate;
 	float upload_rate;
 	uint32_t connection_hits;
