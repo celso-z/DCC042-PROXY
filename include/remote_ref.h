@@ -1,3 +1,5 @@
+#ifndef REMOTE_REF_H
+#define REMOTE_REF_H
 #include <string.h>
 #include <stdlib.h>
 #include <netdb.h>
@@ -19,3 +21,5 @@ typedef struct remote_ref{
 remote_ref *init_remote_ref(const char *addr_str);
 void free_remote_ref(remote_ref *r);
 uint8_t confrontation(remote_ref *remote_a, remote_ref *remote_b);
+
+#endif
