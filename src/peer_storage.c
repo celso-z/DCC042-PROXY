@@ -27,13 +27,17 @@ remote_ref *deserialize(const char *file_name, long offset){
 	uint8_t rc = 0;
 
 	if(r == NULL) return NULL;
+	if(file_name == NULL) return NULL;
+	if(offset < 0) return NULL;
 	if(strlen(file_name)) fp = fopen(file_name, "rb+");
 	else fp = fopen(DEFAULT_DESTINATION, "rb+");
 
 	if(fp == NULL) return NULL;
-	fseek(fp, 0, SEEK_END);
-	file_size = ftell(fp);
-	fseek(fp, 0, SEEK_SET);
+	rc = fseek(fp, offset * sizeof(remote_ref), SEEK_SET);
+	if(rc == -1){
+		fclose(fp);
+		return NULL;
+	}
 
 	rc = fread((void *)r, sizeof(remote_ref), 1, fp);
 	fclose(fp);

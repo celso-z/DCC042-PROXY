@@ -8,6 +8,6 @@
 #define DEFAULT_DESTINATION "../doc/peer_list.bin"
 
 int8_t serialize(remote_ref *r, const char* file_name);
-remote_ref* deserialize(const char *file_name, uint32_t offset);
+remote_ref* deserialize(const char *file_name, long offset);
 
 #endif
