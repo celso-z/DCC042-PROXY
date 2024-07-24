@@ -1,6 +1,8 @@
 #include <peer_storage.h>
 
 int8_t serialize(remote_ref *r, const char *file_name){
+	struct addrinfo *tmp = NULL;
+
 	if(r == NULL) return -1;
 	if(file_name == NULL) return -1;
 
@@ -12,7 +14,10 @@ int8_t serialize(remote_ref *r, const char *file_name){
 	
 	if(fp == NULL)  return -2;
 
+	tmp = r->addr;
+	r->addr = NULL; //addrinfo should not be saved, it will not be useful after the current session
 	rc = fwrite((void *)r, sizeof(remote_ref), 1, fp);
+	r->addr = tmp;
 	fclose(fp);
 	if(rc != 1) return -3;
 
