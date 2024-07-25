@@ -8,7 +8,7 @@ void setup(void){
 
 void teardown(void){
 
-	free_remote_ref(r);
+	free_remote_ref(&r);
 }
 
 void setup_deserialize(void){
@@ -18,7 +18,7 @@ void setup_deserialize(void){
 	r->download_rate = 12.5;
 	r->upload_rate = 12.5;
 	rc = serialize(r, "");
-	free_remote_ref(r);
+	free_remote_ref(&r);
 	r = NULL;
 }
 
@@ -56,12 +56,12 @@ START_TEST(test_deserialization){
 	ck_assert_msg(r->score == 999, "DESERIALIZATION ERROR, remote_ref fields are not stored correctly\n", r->score);
 	ck_assert_msg(r->download_rate == 12.5, "DESERIALIZATION ERROR, remote_ref fields are not stored correctly\n");
 	ck_assert_msg(r->upload_rate == 12.5, "DESERIALIZATION ERROR, remote_ref fields are not stored correctly\n");
-	free_remote_ref(r);
+	free_remote_ref(&r);
 	r = NULL;
 	r = deserialize("", 0);
 	ck_assert_msg(r != NULL, "DESERIALIZATION ERROR\n");
 	ck_assert_msg(!strcmp(r->addr_str, "Test"), "DESERIALIZATION ERROR, remote_ref fields are not stored correctly %s\n", r->addr_str);
-	free_remote_ref(r);
+	free_remote_ref(&r);
 	
 }
 END_TEST

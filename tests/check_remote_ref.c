@@ -13,20 +13,20 @@ void setup(void){
 
 void teardown(void){
 
-	free_remote_ref(remote_a);
-	free_remote_ref(remote_b);
+	free_remote_ref(&remote_a);
+	free_remote_ref(&remote_b);
 }
 
 START_TEST(test_remote_ref_init){
 	remote_ref *r = init_remote_ref("");
 	ck_assert_msg(r == NULL, "remote_ref_init should return NULL given an empty address\n");
-	free_remote_ref(r);
+	free_remote_ref(&r);
 	r = init_remote_ref("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	ck_assert_msg(r == NULL, "remote_ref_init should return NULL given an argument over 255 octets long");
-	free_remote_ref(r);
+	free_remote_ref(&r);
 	r = init_remote_ref("127.0.0.1");
 	ck_assert_msg(r != NULL, "Sanity check");
-	free_remote_ref(r);
+	free_remote_ref(&r);
 }
 END_TEST
 

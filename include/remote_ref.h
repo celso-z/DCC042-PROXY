@@ -19,7 +19,7 @@ typedef struct remote_ref{
 }remote_ref;
 
 remote_ref *init_remote_ref(const char *addr_str);
-void free_remote_ref(remote_ref *r);
+void free_remote_ref(remote_ref **r);
 uint8_t confrontation(remote_ref *remote_a, remote_ref *remote_b);
 
 #endif
