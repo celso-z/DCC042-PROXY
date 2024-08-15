@@ -25,7 +25,7 @@ START_TEST(test_init_binheap_node){
 	node = init_binheap_node(r);
 	ck_assert_msg(node != NULL, "init_binheap_node should return a valid binomial heap node given an valid argument");
 	ck_assert_msg(get_node_value(node) != NULL, "init_binheap_node should return a valid binomial heap node given an valid argument");
-	ck_assert_msg(strcmp((get_node_value(node))->addr_str, "127.0.0.1") != 0, "init_binheap_node should return a valid binomial heap node given an valid argument");
+	ck_assert_msg(strcmp((get_node_value(node))->addr_str, "127.0.0.1") == 0, "init_binheap_node should return a valid binomial heap node given an valid argument");
 }
 END_TEST
 
