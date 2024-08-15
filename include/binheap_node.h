@@ -14,7 +14,7 @@ struct binheap_node {
 	remote_ref *value;
 };
 
-struct binheap_node *binheap_node_init(remote_ref *value);
+struct binheap_node *init_binheap_node(remote_ref *value);
 remote_ref* get_node_value(struct binheap_node *node);
-void binheap_node_free(struct binheap_node **node);
+void free_binheap_node(struct binheap_node **node);
 #endif

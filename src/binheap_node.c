@@ -1,6 +1,6 @@
 #include <binheap_node.h>
 
-struct binheap_node *binheap_node_init(remote_ref *value){
+struct binheap_node *init_binheap_node(remote_ref *value){
 	if(value == NULL) return NULL;
 	struct binheap_node *new_node = calloc(1, sizeof(struct binheap_node));
 	if(new_node == NULL) return new_node;
@@ -16,7 +16,7 @@ remote_ref* get_node_value(struct binheap_node *node){
 	return node->value;
 }
 
-void binheap_node_free(struct binheap_node **node){
+void free_binheap_node(struct binheap_node **node){
 	if(node == NULL) return;
 	if(*node == NULL) return;
 	free(*node);
