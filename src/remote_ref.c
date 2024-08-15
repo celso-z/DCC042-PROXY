@@ -17,7 +17,8 @@ remote_ref *init_remote_ref(const char *addr_str){
 	 * new_ref->dowload_rate = getDownloadRate(new_ref->addr)
 	 * new_ref->upload_rate = getDownloadRate(new_ref->addr)
 	 */
-	new_ref->score = new_ref->connection_hits = new_ref->download_rate = new_ref->upload_rate = 0;
+	new_ref->connection_hits = new_ref->download_rate = new_ref->upload_rate = 0;
+	new_ref->score = 1000;
 	int rc = getaddrinfo(addr_str,PORT, &hints, &new_ref->addr);
 	if(rc == 0) new_ref->connection_hits = (1 << 31); //Remote host online, update connection_hits, otherwhise do nothing
 	

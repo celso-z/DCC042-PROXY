@@ -12,8 +12,9 @@ struct binheap_node *init_binheap_node(remote_ref *value){
 	return new_node;
 }
 
-remote_ref* get_node_value(struct binheap_node *node){
-	return node->value;
+uint16_t get_node_score(struct binheap_node *node){
+	if(node == NULL) return UINT16_MAX;
+	return (node->value)->score;
 }
 
 void free_binheap_node(struct binheap_node **node){
